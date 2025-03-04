@@ -42,5 +42,13 @@
       "last 1 safari version"
     ]
     
-  }
+  },
+  "jest": {
+  "testMatch": [
+    "**/src/**/*.test.js",
+    "**/src/**/*.spec.js",
+    "**/src/**/*.{test,spec}.{js,jsx,ts,tsx}"
+  ]
+}
+
 }
