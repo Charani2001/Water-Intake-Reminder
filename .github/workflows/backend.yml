@@ -44,6 +44,6 @@ jobs:
 
       - name: Deploy to Railway
         working-directory: backend
-        run: railway up --service backend --ci
+        run: railway up --ci
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
