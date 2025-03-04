@@ -43,7 +43,6 @@ jobs:
           export PATH="$HOME/.railway/bin:$PATH"
 
       - name: Deploy to Railway
-        working-directory: backend
         run: railway up --service Water-Intake-Reminder --ci
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
