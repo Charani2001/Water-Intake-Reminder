@@ -43,9 +43,13 @@
     ]
   },
   "jest": {
-    "testMatch": [
-      "**/src/**/*.test.js",
-      "**/src/**/*.spec.js"
-    ]
+  "transformIgnorePatterns": [
+    "/node_modules/(?!axios/)"
+  ]
+},
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "babel-jest": "^29.7.0"
   }
 }
