@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 23
+          node-version: 20
 
       - name: Install dependencies
         working-directory: backend
@@ -37,9 +37,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to Railway
+      - name: Install Railway CLI
         run: |
-          curl -fsSL cli.railway.app
-          railway up
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          curl -fsSL https://railway.app/install.sh | sh
+          export PATH="$HOME/.railway/bin:$PATH"
+
+      - name: Verify Railway CLI
+        run: railway --version
+
+      - name: Deploy to Railway
+        working-directory: backend
+        run: railway up --service backend --token ${{ secrets.RAILWAY_TOKEN }}
