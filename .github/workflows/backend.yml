@@ -44,6 +44,6 @@ jobs:
 
       - name: Deploy to Railway
         working-directory: backend
-        run: railway up --ci
+        run: railway up --service Water-Intake-Reminder --ci
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
