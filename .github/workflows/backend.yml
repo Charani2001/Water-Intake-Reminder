@@ -36,15 +36,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+      
       - name: Install Railway CLI
         run: |
           curl -fsSL https://railway.app/install.sh | sh
           export PATH="$HOME/.railway/bin:$PATH"
-
-      - name: Verify Railway CLI
-        run: railway --version
-
+      
+      - name: Authenticate Railway
+        run: railway login --token $RAILWAY_TOKEN
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      
       - name: Deploy to Railway
         working-directory: backend
-        run: railway up --service backend --token ${{ secrets.RAILWAY_TOKEN }}
+        run: railway up --service backend --ci
+      
