@@ -10,7 +10,7 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [waterIntake, setWaterIntake] = useState([]);
   const [amount, setAmount] = useState("");
-  const [isRegistering, setIsRegistering] = useState(true); // Default to Registration page
+  const [isRegistering, setIsRegistering] = useState(true); // efault to Registration page
 
   useEffect(() => {
     const token = localStorage.getItem("token");
