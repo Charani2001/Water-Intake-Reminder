@@ -7,6 +7,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Log environment variables for debugging
+if (!process.env.MONGO_URI) {
+    console.error("❌ ERROR: MONGO_URI is not defined in environment variables.");
+    process.exit(1); // Stop the server
+}
+
 // Middleware
 app.use(express.json());
 app.use(cors());
