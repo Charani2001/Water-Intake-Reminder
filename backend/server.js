@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 
 // Log environment variables for debugging
 if (!process.env.MONGO_URI) {
-    console.error("❌ ERROR: MONGO_URI is not defined in environment variables.");
+    console.error("ERROR: MONGO_URI is not defined in environment variables.");
     process.exit(1); // Stop the server
 }
 
@@ -21,7 +21,7 @@ app.use(cors());
 connectDB().then(() => {
     // Define a test route for Railway
     app.get("/", (req, res) => {
-        res.send("🚀 Backend is running on Railway!");
+        res.send("Backend is running on Railway!");
     });
 
     // API Routes
@@ -30,9 +30,9 @@ connectDB().then(() => {
 
     // Start the server only after DB is connected
     app.listen(PORT, () => {
-        console.log(`✅ Server running on http://localhost:${PORT}`);
+        console.log(`Server running on http://localhost:${PORT}`);
     });
 }).catch((err) => {
-    console.error("❌ Failed to connect to MongoDB:", err);
+    console.error("Failed to connect to MongoDB:", err);
     process.exit(1); // Exit process if DB fails
 });
