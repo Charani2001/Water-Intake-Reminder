@@ -7,14 +7,26 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Middleware
 app.use(express.json());
 app.use(cors());
 
-connectDB();
+// Connect to MongoDB before starting the server
+connectDB().then(() => {
+    // Define a test route for Railway
+    app.get("/", (req, res) => {
+        res.send("🚀 Backend is running on Railway!");
+    });
 
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/water", require("./routes/waterRoutes"));
+    // API Routes
+    app.use("/api/auth", require("./routes/authRoutes"));
+    app.use("/api/water", require("./routes/waterRoutes"));
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    // Start the server only after DB is connected
+    app.listen(PORT, () => {
+        console.log(`✅ Server running on http://localhost:${PORT}`);
+    });
+}).catch((err) => {
+    console.error("❌ Failed to connect to MongoDB:", err);
+    process.exit(1); // Exit process if DB fails
 });
