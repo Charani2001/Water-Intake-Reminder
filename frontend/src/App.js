@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+
 const App = () => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [waterIntake, setWaterIntake] = useState([]);
   const [amount, setAmount] = useState("");
-  const [isRegistering, setIsRegistering] = useState(true); // Default to Registration page
+  const [isRegistering, setIsRegistering] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -15,14 +17,14 @@ const App = () => {
       fetchWaterIntake(token);
       setUser(true);
     } else {
-      setIsRegistering(true); // Ensure Registration page loads first
+      setIsRegistering(true);
     }
   }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token);
       setUser(true);
       fetchWaterIntake(res.data.token);
@@ -34,7 +36,7 @@ const App = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", { email, password });
+      const res = await axios.post(`${API_BASE_URL}/api/auth/register`, { email, password });
       localStorage.setItem("token", res.data.token);
       setUser(true);
       fetchWaterIntake(res.data.token);
@@ -45,7 +47,7 @@ const App = () => {
 
   const fetchWaterIntake = async (token) => {
     try {
-      const res = await axios.get("http://localhost:5000/api/water/history", {
+      const res = await axios.get(`${API_BASE_URL}/api/water/history`, {
         headers: { Authorization: token },
       });
       setWaterIntake(res.data);
@@ -60,7 +62,7 @@ const App = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/water/add",
+        `${API_BASE_URL}/api/water/add`,
         { amount },
         { headers: { Authorization: token } }
       );
@@ -75,7 +77,7 @@ const App = () => {
     localStorage.removeItem("token");
     setUser(null);
     setWaterIntake([]);
-    setIsRegistering(true); // Reset to Registration page on logout
+    setIsRegistering(true);
   };
 
   return (
@@ -97,32 +99,28 @@ const App = () => {
       ) : (
         <div>
           <h2>Dashboard</h2>
-          
-
           <h3>Track Your Water Intake</h3>
           <div style={{ display: 'flex', alignItems: 'center', padding: '10px' }}>
-  <input
-    type="number"
-    placeholder="Enter amount (ml)"
-    value={amount}
-    onChange={(e) => setAmount(e.target.value)}
-    style={{ marginRight: '10px', flex: '1' }} //  flex to make the input take available space
-  />
-  <button
-    onClick={addWaterIntake}
-    style={{ minWidth: '150px', padding: '8px 16px' }} // Adjust minWidth and padding for button size
-  >
-    Add Water Intake
-  </button>
-</div>
+            <input
+              type="number"
+              placeholder="Enter amount (ml)"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              style={{ marginRight: '10px', flex: '1' }}
+            />
+            <button
+              onClick={addWaterIntake}
+              style={{ minWidth: '150px', padding: '8px 16px' }}
+            >
+              Add Water Intake
+            </button>
+          </div>
           <h3>Water Intake History</h3>
-          
-            {waterIntake.map((entry, index) => (
-              <li key={index}>
-                {entry.amount} ml - {new Date(entry.date).toLocaleString()}
-              </li>
-            ))}
-
+          {waterIntake.map((entry, index) => (
+            <li key={index}>
+              {entry.amount} ml - {new Date(entry.date).toLocaleString()}
+            </li>
+          ))}
           <button onClick={handleLogout} style={{ backgroundColor: "red", color: "#fff" }}>Logout</button>  
         </div>
       )}
