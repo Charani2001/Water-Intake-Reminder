@@ -106,7 +106,7 @@ const App = () => {
     placeholder="Enter amount (ml)"
     value={amount}
     onChange={(e) => setAmount(e.target.value)}
-    style={{ marginRight: '10px', flex: '1' }} // Use flex to make the input take available space
+    style={{ marginRight: '10px', flex: '1' }} //  flex to make the input take available space
   />
   <button
     onClick={addWaterIntake}
