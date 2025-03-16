@@ -18,6 +18,12 @@
     "serialize-javascript": "^6.0.2",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "@babel/core": "^7.22.0",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "babel-jest": "^29.7.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -41,14 +47,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-    
   },
   "jest": {
-  "testMatch": [
-    "**/src/**/*.test.js",
-    "**/src/**/*.spec.js",
-    "**/src/**/*.{test,spec}.{js,jsx,ts,tsx}"
-  ]
-}
-
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^axios$": "<rootDir>/node_modules/axios/index.js"
+    },
+    "testMatch": [
+      "**/src/**/*.test.js",
+      "**/src/**/*.spec.js",
+      "**/src/**/*.{test,spec}.{js,jsx,ts,tsx}"
+    ]
+  }
 }
