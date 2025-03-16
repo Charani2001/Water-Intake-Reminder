@@ -28,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --config=jest.config.js",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,7 +48,23 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-    
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(axios)/)"
+    ],
+    "moduleNameMapper": {
+      "^axios$": "<rootDir>/node_modules/axios/index.js"
+    },
+    "testMatch": [
+      "**/src/**/*.test.js",
+      "**/src/**/*.spec.js",
+      "**/src/**/*.{test,spec}.{js,jsx,ts,tsx}"
+    ],
+    "testEnvironment": "jsdom"
   }
-
+  
 }
