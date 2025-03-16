@@ -81,18 +81,45 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Water Intake Reminder</h1>
-
+    <div style={{
+      background: "linear-gradient(to right, #6a11cb, #2575fc)",
+      minHeight: "100vh",
+      color: "#fff",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "20px",
+    }}>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Water Intake Reminder</h1>
+      
       {!user ? (
-        <div>
+        <div style={{ textAlign: "center", padding: "20px", background: "rgba(255, 255, 255, 0.2)", borderRadius: "10px" }}>
           <h2>{isRegistering ? "Register" : "Login"}</h2>
           <form onSubmit={isRegistering ? handleRegister : handleLogin}>
-            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            <button type="submit">{isRegistering ? "Register" : "Login"}</button>
+            <input 
+              type="email" 
+              placeholder="Email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              required 
+              style={{ padding: "10px", borderRadius: "5px", border: "none", marginBottom: "10px", width: "100%" }}
+            />
+            <input 
+              type="password" 
+              placeholder="Password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              required 
+              style={{ padding: "10px", borderRadius: "5px", border: "none", marginBottom: "10px", width: "100%" }}
+            />
+            <button type="submit" style={{ padding: "10px", borderRadius: "5px", background: "#ff4081", color: "#fff", border: "none", cursor: "pointer" }}>
+              {isRegistering ? "Register" : "Login"}
+            </button>
           </form>
-          <button onClick={() => setIsRegistering(!isRegistering)}>
+          <button 
+            onClick={() => setIsRegistering(!isRegistering)}
+            style={{ background: "transparent", color: "#fff", border: "none", cursor: "pointer", marginTop: "10px" }}>
             {isRegistering ? "Already have an account? Login" : "Don't have an account? Register"}
           </button>
         </div>
@@ -106,22 +133,22 @@ const App = () => {
               placeholder="Enter amount (ml)"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              style={{ marginRight: '10px', flex: '1' }}
+              style={{ padding: "10px", borderRadius: "5px", border: "none", marginRight: "10px", flex: "1" }}
             />
             <button
               onClick={addWaterIntake}
-              style={{ minWidth: '150px', padding: '8px 16px' }}
+              style={{ minWidth: '150px', padding: '8px 16px', borderRadius: "5px", background: "#4CAF50", color: "#fff", border: "none", cursor: "pointer" }}
             >
               Add Water Intake
             </button>
           </div>
           <h3>Water Intake History</h3>
           {waterIntake.map((entry, index) => (
-            <li key={index}>
+            <li key={index} style={{ listStyle: "none", padding: "5px" }}>
               {entry.amount} ml - {new Date(entry.date).toLocaleString()}
             </li>
           ))}
-          <button onClick={handleLogout} style={{ backgroundColor: "red", color: "#fff" }}>Logout</button>  
+          <button onClick={handleLogout} style={{ backgroundColor: "red", color: "#fff", padding: "10px", borderRadius: "5px", border: "none", cursor: "pointer" }}>Logout</button>  
         </div>
       )}
     </div>
