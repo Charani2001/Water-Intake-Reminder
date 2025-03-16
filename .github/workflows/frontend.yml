@@ -37,9 +37,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Node.js (again for the deploy step)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies (again for deploy)
+        working-directory: frontend
+        run: npm install
+
+      - name: Build the frontend
+        working-directory: frontend
+        run: npm run build  # This creates the build folder
+
       - name: Install Netlify CLI
         run: npm install -g netlify-cli
 
       - name: Deploy to Netlify
         working-directory: frontend
-        run: netlify deploy --dir=dist --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}
+        run: netlify deploy --dir=frontend/build --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}
