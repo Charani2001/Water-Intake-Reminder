@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -27,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --config=jest.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,18 +48,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "moduleNameMapper": {
-      "^axios$": "<rootDir>/node_modules/axios/index.js"
-    },
-    "testMatch": [
-      "**/src/**/*.test.js",
-      "**/src/**/*.spec.js",
-      "**/src/**/*.{test,spec}.{js,jsx,ts,tsx}"
-    ]
+    
   }
+
 }
