@@ -75,7 +75,7 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    //localStorage.removeItem("token");
     setUser(null);
     setWaterIntake([]);
     setIsRegistering(true);
