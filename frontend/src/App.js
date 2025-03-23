@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// Set the API base URL dynamically from .env or fallback to localhost for development
 const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 const App = () => {
