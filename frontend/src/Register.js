@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+//const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 const Register = ({ onRegister }) => {
   const [email, setEmail] = useState("");
@@ -10,9 +10,9 @@ const Register = ({ onRegister }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    
+
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/auth/register`, { email, password });
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/register`, { email, password });
       localStorage.setItem("token", res.data.token);
       //onRegister(res.data.token);
       navigate("/")
