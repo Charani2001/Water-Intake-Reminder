@@ -10,10 +10,12 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+    
     try {
       const res = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token);
-      onLogin(res.data.token);
+      //onLogin(res.data.token);
       navigate("/App")
     } catch (err) {
       alert("Login failed");
