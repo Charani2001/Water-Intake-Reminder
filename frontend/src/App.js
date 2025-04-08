@@ -41,9 +41,9 @@ const App = () => {
         email, 
         password,
        });
-      //localStorage.setItem("token", res.data.token);
-      //setUser(true);
-      //fetchWaterIntake(res.data.token);
+      localStorage.setItem("token", res.data.token);
+      setUser(true);
+      fetchWaterIntake(res.data.token);
     } catch (err) {
       alert("Registration failed");
     }
