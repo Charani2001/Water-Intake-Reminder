@@ -37,7 +37,9 @@ const App = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/auth/register`, { email, password });
+      const res = await axios.post(`${process.env.API_BASE_URL}/api/auth/register`, { 
+        email, 
+        password });
       localStorage.setItem("token", res.data.token);
       setUser(true);
       fetchWaterIntake(res.data.token);
