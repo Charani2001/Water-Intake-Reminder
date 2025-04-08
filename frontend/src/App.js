@@ -3,12 +3,11 @@ import Login from "./login.js";
 import Register from "./Register.js";
 import axios from "axios";
 
-
+// Use environment variable from .env file
 const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 const App = () => {
   const [user, setUser] = useState(null);
-
   const [isRegistering, setIsRegistering] = useState(true);
   const [amount, setAmount] = useState("");
   const [waterIntake, setWaterIntake] = useState([]);
@@ -18,11 +17,9 @@ const App = () => {
     if (token) {
       setUser(true);
       fetchWaterIntake(token);
-      
     }
   }, []);
 
-  
   const fetchWaterIntake = async (token) => {
     try {
       const res = await axios.get(`${API_BASE_URL}/api/water/history`, {
@@ -55,11 +52,10 @@ const App = () => {
     localStorage.removeItem("token");
     setUser(null);
     setWaterIntake([]);
-
   };
 
   return (
-    <div>
+    <div style={{ padding: "20px", fontFamily: "Arial" }}>
       <h1>Water Intake Reminder</h1>
       {!user ? (
         <div>
