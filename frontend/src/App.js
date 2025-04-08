@@ -4,7 +4,7 @@ import Register from "./Register.js";
 import axios from "axios";
 
 // Use environment variable from .env file
-const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+//const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -22,7 +22,7 @@ const App = () => {
 
   const fetchWaterIntake = async (token) => {
     try {
-      const res = await axios.get(`${API_BASE_URL}/api/water/history`, {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/water/history`, {
         headers: { Authorization: token },
       });
       setWaterIntake(res.data);
@@ -37,7 +37,7 @@ const App = () => {
 
     try {
       await axios.post(
-        `${API_BASE_URL}/api/water/add`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/water/add`,
         { amount },
         { headers: { Authorization: token } }
       );
