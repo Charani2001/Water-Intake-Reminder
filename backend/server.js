@@ -13,7 +13,7 @@ if (!process.env.MONGO_URI) {
     process.exit(1); // Stop the server
 }
 
-// Middleware
+
 app.use(express.json());
 app.use(cors());
 
