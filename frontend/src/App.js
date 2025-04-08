@@ -25,7 +25,7 @@ const App = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.API_BASE_URL}/api/auth/login`, { email, password });
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token);
       setUser(true);
       fetchWaterIntake(res.data.token);
@@ -38,8 +38,7 @@ const App = () => {
     e.preventDefault();
     try {
       const res = await axios.post(`${process.env.API_BASE_URL}/api/auth/register`, { 
-        email, 
-        password, });
+        email, password });
       localStorage.setItem("token", res.data.token);
       setUser(true);
       fetchWaterIntake(res.data.token);
@@ -50,7 +49,7 @@ const App = () => {
 
   const fetchWaterIntake = async (token) => {
     try {
-      const res = await axios.get(`${process.env.API_BASE_URL}/api/water/history`, {
+      const res = await axios.get(`${API_BASE_URL}/api/water/history`, {
         headers: { Authorization: token },
       });
       setWaterIntake(res.data);
